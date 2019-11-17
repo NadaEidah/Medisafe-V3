@@ -30,13 +30,14 @@ class Login extends Component {
        const { navigate } = this.props.navigation;
         // console.log('loginUser :', loginUser )
         axios
-       .post("http://10.60.95.169:2000/login", this.state)//Orange ip
-       //.post("http://192.168.1.9:2000/login", this.state)//Home ip
+       .post("http://10.60.243.170:2000/login", this.state)//Orange ip
+      //  .post("http://192.168.1.4:2000/login", this.state)//Home ip
 
         .then(async function (response){
           that.saveData(response.data);
           var role= await AsyncStorage.getItem('_id');
           console.log('Uuuuuuuuuuuuu :', response.data._id);
+
           if(role){
             navigate('Profile',response.data)
           }
@@ -47,6 +48,7 @@ class Login extends Component {
     
     
       }
+    
 
       // logUser = (e, name) => {
       //   this.setState({
@@ -81,6 +83,12 @@ class Login extends Component {
                   <Text style={styles.buttonText}>Login</Text>
 
                 </TouchableOpacity>
+
+                {/* <TouchableOpacity style={styles.button}
+                  onPress={()=>{this.props.navigation.navigate('Measurment');}}>
+                  <Text style={styles.buttonText}>Measurment</Text>
+
+                </TouchableOpacity> */}
                 <View style={styles.signupTextCont}>
                   <TouchableOpacity style={styles.signupText}
                     onPress={()=>{

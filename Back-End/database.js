@@ -1,6 +1,6 @@
 //======================================Connection=============================================//
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/Medisafe", {
+mongoose.connect("mongodb://localhost/Medisafe1", {
   useNewUrlParser: true
 });
 const db = mongoose.connection;
@@ -76,9 +76,62 @@ let registUser = (cb, obj) => {
     }
   );
 };
+let getMedic = (cb, box) => {
+  console.log("boxxxxxx :", box.id);
+  Users.findOne({ _id: box.id }, function(err, docsFind) {
+    if (err) {
+      console.log("ERR:", err);
+    }
+    console.log("docsFindddddddd :", docsFind);
+    let date = Date.parse(box.datetime);
+    // let time = Date.parse(box.time);
+
+    // console.log(typeof date);
+    let y = {
+      medname: box.medname,
+      datetime: date
+    };
+    // delete box.id
+    // console.log("JSON PARSE: ", JSON.stringify(y))
+    docsFind.medication.push(y);
+    docsFind.save(function(err, docsSave) {
+      if (err) {
+        console.log("ERR:", err);
+      }
+      cb(docsSave);
+    });
+  });
+};
+
+let measurmentUser = (cb,obj)=>{
+  console.log('cb from db',cb)
+  console.log('obj from db',obj)
+
+  Users.findOne({_id:obj.id}, function(err,addMeasr){
+    if (err){
+      console.log('err', err);
+    }
+    // let date = Date.parse(box.datetime);
+    console.log('addMeasr :', addMeasr);
+    let measr ={
+      bloodSugar:obj.bloodSugar,
+      date:obj.date
+    };
+    // addMeasr.measurement.push(JSON.stringify(measr));
+    addMeasr.measurement.push(measr);
+    addMeasr.save(function(err,measrSave){
+      if(err){
+        console.log('err', err)
+      }
+      cb(measrSave);
+    });
+  });
+};
 //=====================================MODULE EXPORTS=============================================//
 module.exports = {
   getDate,
   registUser,
-  getUser
+  getUser,
+  measurmentUser,
+  getMedic
 };

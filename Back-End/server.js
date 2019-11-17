@@ -51,7 +51,37 @@ app.post("/login", (req, res) => {
     res.json(repo);
   }, object);
 });
-
+app.post("/measurment", (req, res) => {
+  let box = req.body;
+  console.log("box", box);
+  DB.measurmentUser(x => {
+    console.log("Measurment in server");
+    res.json(x);
+  },box);
+});
+app.post("/showDataMeas", (req, res) => {
+  let box = req.body;
+  console.log('showDataMeas :', box);
+  DB.getDate(result => {
+    console.log("CALL BACK FROM SERVER showDataMeas");
+    res.json(result);
+  }, box);
+});
+app.post("/showdata", (req, res) => {
+  let box = req.body;
+  console.log('IDDDDDDDDDD :', box);
+  DB.getDate(result => {
+    console.log("CALL BACK FROM SERVER");
+    res.json(result);
+  }, box);
+});
+app.post("/medication", (req, res) => {
+  let object = req.body;
+  console.log('objectttttttttttttttt :', object);
+  DB.getMedic(repo => {
+    res.json(repo);
+  }, object);
+});
 // app.post("/addPlace", (req, res) => {
 //   let inputs=req.body;
 //   console.log("BODY:", inputs);

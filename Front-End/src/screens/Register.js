@@ -26,8 +26,8 @@ class Register extends Component {
       var that=this;
       const { navigate } = this.props.navigation;
         axios
-           .post("http://10.60.95.169:2000/registration", this.state)//Orange ip
-          //.post("http://192.168.1.9:2000/registration", this.state)//Home ip
+           .post("http://10.60.243.170:2000/registration", this.state)//Orange ip
+          // .post("http://192.168.1.4:2000/registration", this.state)//Home ip
 
           .then(async function (response) {
             that.saveData(response.data);
@@ -69,6 +69,11 @@ class Register extends Component {
         <TouchableOpacity style={styles.button} onPress={this.addRegistration }>
           <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>  
+          {/* <TouchableOpacity 
+              onPress={()=> this.props.navigation.replace('Measurment')}>
+             <Text>Measurment</Text>
+        </TouchableOpacity> */}
+
         {/* <Button title="Submit" onPress={this.addRegistration }/> */}
 {/*   
         <TouchableOpacity 
@@ -76,8 +81,8 @@ class Register extends Component {
              <Text>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity 
-              onPress={()=> this.props.navigation.replace('Register')}>
-             <Text>Register</Text>
+              onPress={()=> this.props.navigation.replace('Measurment')}>
+             <Text>Measurment</Text>
         </TouchableOpacity>
         <TouchableOpacity 
              onPress={()=> this.props.navigation.goBack()}>
